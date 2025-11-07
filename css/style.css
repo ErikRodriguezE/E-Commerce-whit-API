@@ -23,18 +23,107 @@ header h1 {
 
 /* Botón */
 .login-btn {
-    background-color: white;
+    background: linear-gradient(145deg, #FFD700, #E6BE00 60%, #FFF8C6 90%); /* Dorado con brillo */
     color: #8B0000;
     border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 12px 28px;
+    border-radius: 8px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    box-shadow: 
+        0 4px 0 #b38f00,  /* efecto de profundidad */
+        0 0 12px rgba(255, 215, 0, 0.4); /* brillo dorado suave */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); /* profundidad del texto */
+    transition: all 0.25s ease-in-out;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Efecto al pasar el mouse */
-.login-btn:hover {
-    background-color: #f1f1f1;
-    transform: scale(1.05);
+/* efecto de brillo animado constante */
+.login-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    animation: brillo 3s infinite linear;
 }
+
+/* animación del brillo que pasa suavemente */
+@keyframes brillo {
+    0% { left: -75%; }
+    50% { left: 125%; }
+    100% { left: 125%; }
+}
+
+/* Hover: se hace más luminoso */
+.login-btn:hover {
+    background: linear-gradient(145deg, #FFE44D, #FFD000 60%, #FFF8C6 90%);
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 0 #b38f00,
+        0 0 16px rgba(255, 235, 100, 0.7);
+}
+
+/* Active: se hunde un poco */
+.login-btn:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 2px 0 #b38f00;
+    background: linear-gradient(145deg, #E6BE00, #FFD700);
+}
+
+/* --- Subnavegación (bajo el header) --- */
+.subnav {
+    background: linear-gradient(180deg, #660000, #4d0000); /* más oscuro, efecto escalón */
+    padding: 10px 40px;
+    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.1); /* borde superior suave */
+    display: flex;
+    justify-content: left; /* centra horizontalmente */
+    border-top: 2px solid rgba(255, 255, 255, 0.15); /* línea que separa del header */
+}
+
+.subnav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px; /* separación entre subcategorías */
+    margin: 0;
+    padding: 0;
+}
+
+/* * AQUÍ ESTÁ EL CAMBIO
+* Cambiamos 'a' por 'button' y añadimos los estilos de reseteo 
+*/
+.subnav button {
+    /* --- 1. Reseteo para que no parezca un botón --- */
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit; /* Usa la misma fuente que el resto de la página */
+    cursor: pointer;
+
+    /* --- 2. Estilos que ya tenías del 'a' --- */
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+/* * AQUÍ ESTÁ EL OTRO CAMBIO
+* Cambiamos 'a:hover' por 'button:hover'
+*/
+.subnav button:hover {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+}
+
+
+
