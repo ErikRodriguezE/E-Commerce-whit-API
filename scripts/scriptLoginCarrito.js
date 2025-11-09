@@ -246,7 +246,6 @@ function closeProductModal() {
 }
 if (closeProductModalBtn) {
     closeProductModalBtn.addEventListener('click', closeProductModal);
-    console.log("Listener de cierre de modal de producto añadido.");
 }
 
 
