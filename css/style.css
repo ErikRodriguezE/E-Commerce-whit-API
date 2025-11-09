@@ -126,4 +126,302 @@ header h1 {
 }
 
 
+/* --- Estilos de la Ventana Modal --- */
 
+/* 1. Capa Oscura de Fondo (Overlay) */
+.modal-overlay {
+    /* Ocupa toda la pantalla */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Fondo semi-transparente y oscuro */
+    background-color: rgba(0, 0, 0, 0.7); 
+    
+    /* Centra el contenido (el formulario) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Ocultar por defecto */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    
+    /* Poner encima de todo */
+    z-index: 1000; 
+}
+
+/* 2. Clase para Mostrar el Modal */
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 3. Contenedor del Formulario (La "ventana" blanca) */
+.modal-content {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px; /* Limitar el ancho */
+    position: relative;
+    /* Efecto de entrada/salida */
+    transform: scale(0.95);
+    transition: transform 0.3s ease-out;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1); /* Vuelve al tamaño normal al mostrarse */
+}
+
+/* 4. Estilos del Formulario y Botones */
+.modal-content h2 {
+    color: #8B0000;
+    margin-top: 0;
+    text-align: center;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* Usar el botón dorado que creaste antes */
+.modal-content .product-btn { 
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* 5. Botón de Cerrar (la 'x') */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.carrito{
+    width: 43px;
+    height: auto;
+    cursor: pointer;
+}
+.userContent{
+    display: grid;
+    gap: 10px;
+    align-items: center;
+    grid-template-columns: auto 1fr auto;
+}
+
+.contador-carrito {
+    /* Posicionamiento: Sale de su flujo normal y se posiciona en relación al .carrito-contenedor */
+    position: absolute; 
+    top: -5px;      /* Mueve el círculo 5px hacia arriba (fuera del icono) */
+    right: -5px;    /* Mueve el círculo 5px hacia la derecha */
+    
+    /* Forma y Estilo */
+    background-color: #FFD700;
+    color: black;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 5px; /* Relleno para dar espacio al número */
+    border-radius: 50%; /* Hace que el span sea perfectamente redondo */
+    min-width: 10px; /* Asegura un ancho mínimo para que se vea bien incluso con un solo dígito */
+    text-align: center;
+    border: 1px solid white; /* Borde para contrastar con el fondo */
+}
+
+.carrito-contenedor {
+    position: relative; /* Define el punto 0,0 para la posición absoluta del contador */
+    display: inline-block; /* Se ajusta al tamaño de la imagen */
+}
+
+
+/* Estilos para el nuevo modal */
+.product-detail-modal {
+    max-width: 800px; /* Haz el modal más ancho para el detalle */
+}
+
+/* Contenedor Grid (2 columnas) */
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* 1 parte para imagen, 1.5 partes para detalles */
+    gap: 30px;
+    padding-top: 20px;
+}
+
+.modal-product-img {
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* Limita la altura de la imagen */
+    object-fit: contain; /* Asegura que la imagen completa se vea */
+}
+
+/* Controles de Cantidad */
+.quantity-controls {
+    margin: 20px 0;
+}
+
+.quantity-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    width: fit-content;
+}
+
+.qty-btn {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.qty-display {
+    padding: 8px 15px;
+    font-weight: bold;
+    min-width: 20px; /* Para que el número no cambie el ancho */
+    text-align: center;
+}
+
+.add-to-cart-btn {
+    background: linear-gradient(145deg, #FFD700, #E6BE00 60%, #FFF8C6 90%);
+    color: #8B0000;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.cart-items-container {
+    /* 🔑 CLAVE 1: Activa Flexbox para colocar los hijos en línea */
+    display: flex;
+    /* 🔑 CLAVE 2: Coloca el primer elemento a la izquierda y el segundo a la derecha */
+    justify-content: space-between; 
+    /* Alinea verticalmente los elementos al centro si tienen diferentes alturas */
+    align-items: center; 
+    
+    max-height: 250px; 
+    overflow-y: auto; 
+    margin-bottom: 10px;
+    padding-right: 5px;
+    /* Añade un borde si quieres separar la línea de los demás contenidos */
+    border-bottom: 1px solid #eee;
+}
+.empty-name-message{
+    color: #000;
+    white-space: pre-wrap;
+}
+.cart-total-value{
+    color: #000;
+}
+.totalCarrito{
+    color: #000;
+}
+.totalPagar{
+    color: #0d47a1;
+}
+.cantidad{
+    color: #000;
+    white-space: pre-wrap;
+}
+
+.userContent {
+    display: grid;
+    grid-template-columns: auto 1fr auto; 
+    gap: 10px; 
+    align-items: center; 
+}
+.carrito-contenedor {
+    position: relative; 
+    display: inline-block; 
+}
+
+/* 1. Estilos del Dropdown (Mini Carrito) */
+.cart-dropdown {
+    /* Posicionamiento y apariencia... (todo lo demás está bien) */
+    position: absolute;
+    top: 100%; 
+    right: 0; 
+    
+    width: 500px; 
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000; 
+    padding: 15px;
+    border-radius: 5px;
+
+    opacity: 0; 
+    visibility: hidden; /* Esto es lo que lo mantiene oculto */
+    transform: translateY(-10px); 
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out; 
+}
+.cart-dropdown.visible {
+    opacity: 1; 
+    visibility: visible;
+    transform: translateY(0); 
+}
+
+/* 2. El Triángulo/Flecha (Usando ::before) */
+.cart-arrow {
+    position: absolute;
+    /* Coloca el triángulo justo en el borde superior, alineado con el carrito */
+    top: -10px; /* Sube 10px por encima del borde */
+    right: 5px; /* Ajusta este valor para que quede centrado bajo el icono del carrito */
+    
+    /* Creación del Triángulo usando bordes */
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #ddd; /* El color del borde superior del dropdown */
+}
+
+/* 3. Estilos del Footer */
+.cart-footer {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
